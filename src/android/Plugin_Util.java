@@ -26,13 +26,18 @@ import java.util.List;
  * This class echoes a string called from JavaScript.
  */
 public class Plugin_Util extends CordovaPlugin {
+    private CallbackContext callbackContext;
+    private Intent intent = null;
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
       
+        Context context = cordova.getActivity().getApplicationContext();
+        this.callbackContext = callbackContext;
+        intent = null;
+
         if (action.equals("coolMethod")) {
             String message = args.getString(0);
-            this.coolMethod(message, callbackContext);
             return true;
         }
         if (action.equals("getVersion")) {
