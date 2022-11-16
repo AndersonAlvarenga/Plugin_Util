@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin 
+    id="plugin.android_ios.Util" 
+    version="1.0.0" 
+    xmlns="http://apache.org/cordova/ns/plugins/1.0" 
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>Plugin_Util</name>
+    <js-module name="Plugin_Util" src="www/Plugin_Util.js">
+        <clobbers target="cordova.plugins.Plugin_Util" />
+    </js-module>
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="Plugin_Util">
+                <param name="android-package" value="plugin.android_ios.Util.Plugin_Util" />
+            </feature>
+        </config-file>
+        <config-file parent="/*" target="AndroidManifest.xml" />
+        <source-file src="src/android/Plugin_Util.java" target-dir="src/plugin/android_ios/Util/Plugin_Util" />
+    </platform>
+    <platform name="ios">
+        <config-file parent="/*" target="config.xml">
+            <feature name="Plugin_Util">
+                <param name="ios-package" value="Plugin_Util" />
+            </feature>
+        </config-file>
+        <source-file src="src/ios/Plugin_Util.m" />
+    </platform>
+</plugin>

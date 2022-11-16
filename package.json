@@ -1,0 +1,19 @@
+{
+  "name": "plugin.android_ios.Util",
+  "version": "1.0.0",
+  "description": "Funções uteis para Outsystems",
+  "cordova": {
+    "id": "plugin.android_ios.Util",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "author": "Anderson Alvarenga",
+  "license": "ISC"
+}
