@@ -6,6 +6,21 @@ import org.apache.cordova.CallbackContext;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.net.Uri;
+import android.util.Log;
+
+
+import org.apache.cordova.CordovaInterface;
+import org.apache.cordova.CordovaWebView;
+
+import android.os.Handler;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.PackageManager;
+
+import java.util.List;
 
 /**
  * This class echoes a string called from JavaScript.
