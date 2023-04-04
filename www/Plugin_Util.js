@@ -1,8 +1,6 @@
 var exec = require('cordova/exec');
 
-exports.coolMethod = function (arg0, success, error) {
-    exec(success, error, 'Plugin_Util', 'coolMethod', [arg0]);
-};
+
 exports.getVersion = function (success, error) {
     exec(success, error, 'Plugin_Util', 'getVersion');
 };
@@ -14,4 +12,7 @@ exports.deleteApp = function (params, success, error) {
 };
 exports.abrirApp = function (params, success, error) {
     exec(success, error, 'Plugin_Util', 'abrirApp', [params]);
+};
+exports.fecharApp = function (params, success, error) {
+    exec(success, error, 'Plugin_Util', 'fecharApp', [params]);
 };

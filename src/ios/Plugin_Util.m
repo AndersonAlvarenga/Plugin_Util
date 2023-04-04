@@ -6,43 +6,47 @@
   // Member variables go here.
 }
 
-- (void)coolMethod:(CDVInvokedUrlCommand*)command;
-- (void)teste:(CDVInvokedUrlCommand*)command;
+- (void)getVersion:(CDVInvokedUrlCommand*)command;
+- (void) getAppsInstalados:(CDVInvokedUrlCommand*)command;
+
 
 @end
 
 @implementation Plugin_Util
 
-- (void)coolMethod:(CDVInvokedUrlCommand*)command
+- (void)getVersion:(CDVInvokedUrlCommand*)command
 {
-    CDVPluginResult* pluginResult = nil;
-    NSString* echo = [command.arguments objectAtIndex:0];
+    NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
+    NSString *appVersion = [infoDict objectForKey:@"CFBundleShortVersionString"];
+    NSNumber *buildNumber = [infoDict objectForKey:@"CFBundleVersion"];
 
-    if (echo != nil && [echo length] > 0) {
-        //Desenvolve metodo aqui
-
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:echo];
-    } else {
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-    }
+    // Build a plugin response
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary: @{@"version": appVersion, @"build": buildNumber}];
 
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
-- (void)teste:(CDVInvokedUrlCommand*)command
-{
-    CDVPluginResult* pluginResult = nil;
-    NSString* echo = [command.arguments objectAtIndex:0];
+-(void) getAppsInstalados:(CDVInvokedUrlCommand*)command
+{    
+    NSDictionary *cacheDict;
 
-    if (echo != nil && [echo length] > 0) {
-        NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-        NSString *build = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey];
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:echo];
-    } else {
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-    }
+    NSDictionary *user;
 
+    static NSString *const cacheFileName = @"com.apple.mobile.installation.plist";
+
+    NSString *relativeCachePath = [[@"Library" stringByAppendingPathComponent: @"Caches"] stringByAppendingPathComponent: cacheFileName];
+
+    NSString *path = [[NSHomeDirectory() stringByAppendingPathComponent: @"../.."] stringByAppendingPathComponent: relativeCachePath];
+
+    cacheDict    = [NSDictionary dictionaryWithContentsOfFile: path];
+
+    user = [cacheDict objectForKey: @"User"];
+
+    NSDictionary *systemApp=[cacheDict objectForKey:@"System"];
+
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary: @{@"ListApps": systemApp, @"info": user}];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-}
+} 
+
 
 @end

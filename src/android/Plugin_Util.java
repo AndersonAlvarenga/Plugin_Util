@@ -36,8 +36,9 @@ public class Plugin_Util extends CordovaPlugin {
         this.callbackContext = callbackContext;
         intent = null;
 
-        if (action.equals("coolMethod")) {
-            String message = args.getString(0);
+        if (action.equals("fechaApp")) {
+            cordova.getActivity();
+            finish();
             return true;
         }
         if (action.equals("getVersion")) {
