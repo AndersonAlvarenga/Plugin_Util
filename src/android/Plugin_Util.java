@@ -36,9 +36,8 @@ public class Plugin_Util extends CordovaPlugin {
         this.callbackContext = callbackContext;
         intent = null;
 
-        if (action.equals("fechaApp")) {
-            cordova.getActivity();
-            finish();
+        if (action.equals("backBotton")) {
+            cordova.getActivity().onBackPressed();
             return true;
         }
         if (action.equals("getVersion")) {
