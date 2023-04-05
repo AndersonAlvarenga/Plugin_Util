@@ -37,6 +37,11 @@ public class Plugin_Util extends CordovaPlugin {
         intent = null;
 
         if (action.equals("backBotton")) {
+            cordova.getActivity().onBackPressed();
+            return true;
+        }
+
+        if (action.equals("fechaApp")) {
             cordova.getActivity().finish();
             return true;
         }

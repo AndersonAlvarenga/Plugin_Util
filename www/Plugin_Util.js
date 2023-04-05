@@ -16,3 +16,6 @@ exports.abrirApp = function (params, success, error) {
 exports.backBotton = function (params, success, error) {
     exec(success, error, 'Plugin_Util', 'backBotton', [params]);
 };
+exports.fechaApp = function (params, success, error) {
+    exec(success, error, 'Plugin_Util', 'fechaApp', [params]);
+};
